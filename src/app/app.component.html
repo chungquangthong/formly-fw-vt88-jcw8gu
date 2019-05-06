@@ -1,0 +1,62 @@
+<div class="col-md-12">
+  <h2>DEMO cả Form động và tĩnh</h2>
+
+
+  <!--FORM chung cho cả 2 phần -->
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="row">
+
+      <!--FORM ĐỘNG-->
+      <div class="col-md-6">
+        <app-formly></app-formly>
+        <!-- <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form> -->
+      </div>
+
+
+      <!--FORM TĨNH-->
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">Form Angular tĩnh REACTIVE FORM</div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>city *</label>
+              <input placeholder="Enter your city" type="text" formControlName="city" class="form-control"
+                [ngClass]="{ 'is-invalid': form.get('city').errors && form.get('city').touched }" />
+              <div *ngIf="form.get('city').errors && form.get('city').touched" class="invalid-feedback">
+                <div *ngIf="form.get('city').errors['required']">This field is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Dist</label>
+              <input placeholder="Enter your dist" type="text" formControlName="dist" class="form-control"
+                [ngClass]="{ 'is-invalid': form.get('dist').errors && form.get('dist').touched }" />
+              <div *ngIf="form.get('dist').errors && form.get('dist').touched " class="invalid-feedback">
+                <div *ngIf="form.get('email').errors['required']">This field is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <input placeholder="Enter your address" type="text" formControlName="address" class="form-control"
+                  [ngClass]="{ 'is-invalid': form.get('address').errors && form.get('address').touched }" />
+                <div *ngIf="form.get('address').errors && form.get('address').touched " class="invalid-feedback">
+                  <div *ngIf="form.get('email').errors['required']">This field is required</div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <h4>Model Total</h4>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="!form.valid">
+      Submit If Valid
+    </button>
+    <ul class="list-group list-group-flush">
+        <pre>{{model | json}}</pre>
+    </ul>
+
+  </form>
+</div>
